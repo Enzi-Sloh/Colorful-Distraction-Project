@@ -7,7 +7,7 @@ const Gallery = (props) =>{
         let art = []
         axios.get('http://localhost:8000/users/' +props.id)
     .then(res => {for(let i = 0; i < res.data.art.length; i++){
-                art.push(<img src={res.data.art[i]}></img>)
+                art.push(<img src={res.data.art[i]} class="sketchy"></img>)
             }
             setUserArt(art)})
     
