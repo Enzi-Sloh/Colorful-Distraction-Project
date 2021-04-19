@@ -1,0 +1,20 @@
+body{background-color: rgb(66, 65, 65);}
+#canvas{
+  height: 100%;
+  box-shadow: -3px 2px 9px 6px black;
+  cursor: pointer;
+  
+}
+.hide{
+  display: none;
+}
+#main{
+  display: flex;
+  flex-wrap: wrap;
+}
+#toolbar{
+  padding-top: 1%;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+}
