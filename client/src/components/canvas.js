@@ -61,22 +61,34 @@ const CanvasStage = (props) => {
         restoreRef.current.push(contextRef.current.getImageData(0,0, canvasRef.current.width, canvasRef.current.height))
         indexref.current += 1;
     }, [elements]);
-
+    const  getMousePos = (canvas, e) => {
+        canvas = canvasRef.current;
+        var rect = canvas.getBoundingClientRect(), // abs. size of element
+            scaleX = canvas.width / rect.width,    // relationship bitmap vs. element for X
+            scaleY = canvas.height / rect.height;  // relationship bitmap vs. element for Y
+      
+        return {
+          x: (e.clientX - rect.left) * scaleX,   // scale mouse coordinates after they have
+          y: (e.clientY - rect.top) * scaleY     // been adjusted to be relative to element
+        }
+      }
     const handleMouseDown = (e) => {
         setDrawing(true);
-        const {clientX, clientY} = e;
+        const canvas = canvasRef.current;
+        let pos = getMousePos(canvas, e);
         if(tool == "brush" || "eraser")
         {contextRef.current.beginPath()
-        contextRef.current.moveTo(clientX, clientY)}
+        contextRef.current.moveTo(pos.x, pos.y)}
 
 
         e.preventDefault();
     }
     const handleMouseMove = (e) => {
         if(!drawing) return;
-        const {clientX, clientY} = e;
+        const canvas = canvasRef.current;
+        let pos = getMousePos(canvas, e);
         if(tool == "brush")
-        {contextRef.current.lineTo(clientX, clientY)
+        {contextRef.current.lineTo(pos.x, pos.y)
         contextRef.current.strokeStyle = color;
         contextRef.current.lineCap = "round"
         contextRef.current.lineWidth = drawWidth;
@@ -84,7 +96,7 @@ const CanvasStage = (props) => {
         contextRef.current.shadowColor = shadeColor;
         contextRef.current.stroke()}
         if(tool == "eraser"){
-            {contextRef.current.lineTo(clientX, clientY)
+            {contextRef.current.lineTo(pos.x, pos.y)
                 contextRef.current.strokeStyle = bgc;
                 contextRef.current.lineCap = "round"
                 contextRef.current.lineWidth = drawWidth;
@@ -156,7 +168,7 @@ const savecanvas = () =>{
 }
   return (
     <div  id="main">
-        <canvas id="canvas" ref={canvasRef} width={window.innerWidth *.90 } height={window.innerHeight *.60}
+        <canvas id="canvas" ref={canvasRef} width={window.innerWidth *.80 } height={window.innerHeight *.60}
         onMouseDown = {handleMouseDown} onMouseMove = {handleMouseMove} onMouseUp = {handleMouseUp}></canvas>
         <div id="toolbar">
         <button  onClick={displayCol} style={{

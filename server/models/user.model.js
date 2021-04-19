@@ -26,7 +26,7 @@ const UserSchema = new mongoose.Schema({
         required: [true, "Password Required"],
         minlength: [8, 'Password must be at least 8 characters long']
     },
-    image: {type: String},
+    image: {type: String, default: "https://res.cloudinary.com/galleries/image/upload/v1618768062/elena_yu7yf1.jpg"},
     art: { type: [String] },
 }, { timestamps: true });
 
