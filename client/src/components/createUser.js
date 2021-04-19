@@ -37,8 +37,7 @@ const User = () =>{
     }
     return(
         <div class="main">
-            <h1>sign up</h1>
-            <h3>Know a pet needing a home?</h3>
+            <h1>Sign Up</h1>
             <div class="details">
         <form onSubmit={createUser} >
             <div class="left">
@@ -62,7 +61,7 @@ const User = () =>{
                 <input type="text"  onChange = {(e)=>setConfirmPassword(e.target.value)}/><br/>
                 <span>{errors.confirmPassword ? errors.confirmPassword.message: "" }</span>
             </p>
-            <button>Add Pet</button>
+            <button>Register</button>
             </div>
             
             

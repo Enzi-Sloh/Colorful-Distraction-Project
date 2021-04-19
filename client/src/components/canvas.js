@@ -124,6 +124,7 @@ const CanvasStage = (props) => {
     }
 
     const undo = () =>{
+        if(indexref.current <= 0) return
         indexref.current -=1;
         redoRef.current.push(contextRef.current.getImageData(0,0, canvasRef.current.width, canvasRef.current.height))
         reIndRef.current +=1;
@@ -131,6 +132,7 @@ const CanvasStage = (props) => {
         contextRef.current.putImageData(restoreRef.current[indexref.current], 0, 0);
     }
     const redo = () =>{
+        if(reIndRef.current <= 0) return
         contextRef.current.putImageData(redoRef.current[reIndRef.current], 0, 0);
         restoreRef.current.push(contextRef.current.getImageData(0,0, canvasRef.current.width, canvasRef.current.height))
         indexref.current += 1;
@@ -177,14 +179,14 @@ const savecanvas = () =>{
             width: 20,
             borderRadius: 100,
         }}></button>
-        {displayC ? <div style={{position: 'absolute', zIndex: '2'}}><div onClick={displaynone} style={{ position: 'fixed',top: '0px',right: '0px',bottom: '0px', left: '0px'}}><ChromePicker disableAlpha color={color} onChangeComplete = {(color)=>setColor(color.hex)} ></ChromePicker></div> </div> :null}
+        {displayC ? <div style={{position: 'absolute', zIndex: '2'}}><div onClick={displaynone} style={{ position: 'fixed',top: '500px',right: '0px',bottom: '0px', left: '0px'}}><ChromePicker disableAlpha color={color} onChangeComplete = {(color)=>setColor(color.hex)} ></ChromePicker></div> </div> :null}
         <button style={{
             backgroundColor: shadeColor,
             height: 20,
             width: 20,
             borderRadius: 100,
         }} onClick={displaySha}></button>
-        {displaySh ? <div style={{position: 'absolute', zIndex: '3'}}><div onClick={displaynone} style={{ position: 'fixed',top: '0px',right: '0px',bottom: '0px', left: '0px'}}><ChromePicker  disableAlpha color={shadeColor} onChangeComplete = {(color)=>setShadeColor(color.hex)}></ChromePicker></div></div> :null}
+        {displaySh ? <div style={{position: 'absolute', zIndex: '3'}}><div onClick={displaynone} style={{ position: 'fixed',top: '500px',right: '0px',bottom: '0px', left: '100px'}}><ChromePicker  disableAlpha color={shadeColor} onChangeComplete = {(color)=>setShadeColor(color.hex)}></ChromePicker></div></div> :null}
         <input type ="range" value={drawWidth} min="1" max="30" onInput={(e)=>setDrawWidth(e.target.value)} />
         <input type ="range" value={shadeblur} min="0" max="10" onInput={(e)=>setShadeBlur(e.target.value)} />
         <button onClick={clearcanvas} type="button">clear</button>

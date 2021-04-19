@@ -40,7 +40,6 @@ const LogIn = () =>{
     return(
         <div class="main">
             <h1>Login</h1>
-            <h3>Know a pet needing a home?</h3>
             <div class="details">
         <form onSubmit={Login}>
             <div class="left">
@@ -54,7 +53,7 @@ const LogIn = () =>{
                 <input type="text" placeholder={password} onChange = {(e)=>setPassword(e.target.value)} /><br/>
                 <span>{errors.password ? errors.password.message: "" }</span>
             </p>
-            <button>Add Pet</button>
+            <button>Log In</button>
             </div>
             
             
